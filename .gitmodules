@@ -1,0 +1,6 @@
+[submodule "Assets/Extensions/Unity-FPSController"]
+	path = Assets/Extensions/Unity-FPSController
+	url = https://github.com/craftwill/Unity-FPSController.git
+[submodule "Assets/Scripts/bytes-unity-utils"]
+	path = Assets/Scripts/bytes-unity-utils
+	url = https://github.com/craftwill/bytes-unity-utils.git
