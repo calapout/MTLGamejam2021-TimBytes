@@ -52,6 +52,11 @@ public class PlayerController : Bytes.Controllers.FPSController
         }
     }
 
+    public void Stop()
+    {
+        GetComponent<Rigidbody>().velocity = Vector3.zero;
+    }
+
     /*public void AddGluten(float amount)
     {
         gluten = Mathf.Clamp(gluten + amount, 0, 100);
