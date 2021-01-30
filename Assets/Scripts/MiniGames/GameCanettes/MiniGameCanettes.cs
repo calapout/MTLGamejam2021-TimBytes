@@ -13,6 +13,8 @@ public class MiniGameCanettes : MiniGame
 
     private void Start()
     {
+        canettes = GameObject.FindObjectsOfType<Canette>();
+
         for (int i = 0; i < canettes.Length; i++)
         {
             int copiedI = i;
