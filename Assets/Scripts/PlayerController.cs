@@ -20,6 +20,10 @@ public class PlayerController : Bytes.Controllers.FPSController
         pickedItem = null;
         
         animController = GetComponentInChildren<GenericAnimationStateMachine>();
+
+        EventManager.AddEventListener("playerDropsObject", (Bytes.Data d)=> {
+            DropObject();
+        });
     }
 
     protected override void Update()
@@ -79,36 +83,47 @@ public class PlayerController : Bytes.Controllers.FPSController
 
     }*/
 
+    // For only disabling tooltip when needed
+    private bool previouslyHadRaycast = false;
+
     protected virtual void _PickItem_Update()
     {
         RaycastHit? storedHit = null;
-        if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out RaycastHit hit, 3f))
-        {
-            storedHit = hit;
-            if (hit.transform.tag == "InteractableRaycast")
-            {
-                Interactable obj = hit.transform.GetComponent<Interactable>();
-                if (obj != null)
-                {
-                    EventManager.Dispatch("setInteractableText", new Bytes.StringDataBytes(obj.GetInteractionDescription()));
-
-                    if (Input.GetKeyDown(KeyCode.Mouse0))
-                    {
-                        obj.Interact(this);
-                    }
-
-                }
-            }
-        }
-
-        if (storedHit == null || storedHit.Value.transform.tag != "InteractableRaycast")
-        {
-            EventManager.Dispatch("setInteractableText", null);
-        }
+        
 
         // Pick
         if (pickedItem == null)
         {
+
+            // Only when player has nothing in its hands
+            #region Interact with View
+            if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out RaycastHit hit, 3f))
+            {
+                storedHit = hit;
+                if (hit.transform.tag == "InteractableRaycast")
+                {
+                    Interactable obj = hit.transform.GetComponent<Interactable>();
+                    if (obj != null)
+                    {
+                        previouslyHadRaycast = true;
+                        EventManager.Dispatch("setInteractableText", new Bytes.StringDataBytes(obj.GetInteractionDescription()));
+
+                        if (Input.GetKeyDown(KeyCode.Mouse0))
+                        {
+                            obj.Interact(this);
+                        }
+
+                    }
+                }
+            }
+
+            if (previouslyHadRaycast && storedHit == null)
+            {
+                previouslyHadRaycast = false;
+                EventManager.Dispatch("setInteractableText", null);
+            }
+            #endregion
+
             if (Input.GetKeyDown(KeyCode.Mouse0) && storedHit != null)
             {
                 if (hit.transform.tag == "Pickable")
@@ -121,8 +136,7 @@ public class PlayerController : Bytes.Controllers.FPSController
         }
         else if(Input.GetKeyDown(KeyCode.Mouse1)) // Drop
         {
-            pickedItem.freezeRotation = true;
-            pickedItem = null;
+            DropObject();
         }
 
         if (pickedItem != null)
@@ -139,6 +153,14 @@ public class PlayerController : Bytes.Controllers.FPSController
             pickedItem.velocity = dir * (forceTowardPickedObj * dis);
         }
 
+    }
+
+    protected void DropObject()
+    {
+        if (pickedItem == null) { return; }
+
+        pickedItem.freezeRotation = true;
+        pickedItem = null;
     }
 
     protected void YeetusTheFeetus()
