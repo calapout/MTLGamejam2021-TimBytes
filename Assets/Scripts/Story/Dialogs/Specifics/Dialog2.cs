@@ -26,6 +26,9 @@ public class Dialog2 : Dialog
         PlayerController player = GameManager.instance.player;
 
         EventManager.Dispatch("setDialogText", new DialogDataBytes("Anna! We have to leave now!", 0));
+        
+        EventManager.Dispatch("playSound", new PlaySoundData("couloir_whitenoise_1", 0.31f));
+
         player.PlayDialog(1, ()=> {
             WaitForNextDialog(()=> {
                 EventManager.Dispatch("setDialogText", new DialogDataBytes("You have to catch me first...", 1));

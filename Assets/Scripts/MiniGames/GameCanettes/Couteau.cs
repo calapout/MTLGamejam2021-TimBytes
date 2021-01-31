@@ -17,6 +17,7 @@ public class Couteau : MonoBehaviour
         if (collision.transform.tag == "Sol")
         {
             alreadyHit = true;
+            Bytes.EventManager.Dispatch("playSound", new PlaySoundData("metal_knife", 0.2f));
             Bytes.Animate.Delay(5f, ()=> {
                 OnHitGround?.Invoke();
                 if(!dontDestroy) Destroy(this.gameObject);

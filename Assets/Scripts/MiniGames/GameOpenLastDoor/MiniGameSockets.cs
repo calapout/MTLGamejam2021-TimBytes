@@ -29,7 +29,7 @@ public class MiniGameSockets : MiniGame
         base.Done();
 
         // Special code...
-
+        Bytes.EventManager.Dispatch("playSound", new PlaySoundData("door_unlock", 0.5f));
     }
 
     public void AddProgression()

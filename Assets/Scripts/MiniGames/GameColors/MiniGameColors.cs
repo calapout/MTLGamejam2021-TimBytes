@@ -27,7 +27,7 @@ public class MiniGameColors : MiniGame
         base.Done();
 
         // Special code...
-
+        Bytes.EventManager.Dispatch("playSound", new PlaySoundData("door_unlock", 0.5f));
     }
 
     public void SetNumberAtIndex(int index, int value)

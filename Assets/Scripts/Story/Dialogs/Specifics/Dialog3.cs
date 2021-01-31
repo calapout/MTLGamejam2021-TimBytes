@@ -18,6 +18,8 @@ public class Dialog3 : Dialog
         print("Dialog 3!");
         PlayerController player = GameManager.instance.player;
 
+        EventManager.Dispatch("playSound", new PlaySoundData("salon_whitenoise", 0.31f));
+
         EventManager.Dispatch("setDialogText", new DialogDataBytes("Come on Anna! It's not funny anymore!", 0));
         player.PlayDialog(4, ()=> {
 

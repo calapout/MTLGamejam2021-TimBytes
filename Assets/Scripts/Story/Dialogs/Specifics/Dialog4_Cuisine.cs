@@ -23,6 +23,8 @@ public class Dialog4_Cuisine : Dialog
         knifeAnim.Play("KnifeFall", -1, 0);
         Animate.Delay(3f, ()=> { knifeAnim.enabled = false; });
 
+        EventManager.Dispatch("playSound", new PlaySoundData("cuisine_whitenoise", 0.31f));
+
         EventManager.Dispatch("setDialogText", new DialogDataBytes("She wants you to kill some cans... HI HI HI", 1));
         annaEntity.PlayDialog(5, () => {
 

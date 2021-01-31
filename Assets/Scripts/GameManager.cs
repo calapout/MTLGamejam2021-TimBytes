@@ -16,18 +16,19 @@ public class GameManager : MonoBehaviour
     private void Awake()
     {
         instance = this;
+        player = GameObject.FindObjectOfType<PlayerController>();
+
+        
     }
 
     private void Start()
     {
-        player = GameObject.FindObjectOfType<PlayerController>();
-
         interactionManager.OnInteractableObjectDetected.AddListener((Interactable InteractableObject) => {
             playerCanvas.UpdateSpeechText(InteractableObject?.GetInteractionDescription());
         });
         interactionManager.OnInteraction.AddListener((Interactable InteractableObject) => {
             playerCanvas.UpdateSpeechText(null);
-            Animate.Delay(1f, ()=> {
+            Animate.Delay(1f, () => {
                 // Resets the tooltip
                 interactionManager.currentInteractableObject = null;
             });
