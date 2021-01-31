@@ -16,7 +16,7 @@ public class InteractionManager : MonoBehaviour
     }
     #endregion
 
-    public float interactThresholdDistance = 3f;
+    public float interactThresholdDistance = 1.5f;
 
     private PlayerController player;
     private List<Interactable> interactablesObjects;
@@ -62,9 +62,14 @@ public class InteractionManager : MonoBehaviour
             }
 
             if (currentInteractableObject != null && closestObject == null)
-            { OnInteractableObjectDetected?.Invoke(closestObject); }
+            {
+                OnInteractableObjectDetected?.Invoke(closestObject);
+            }
             else if (currentInteractableObject == null && closestObject != null)
-            { OnInteractableObjectDetected?.Invoke(closestObject); }
+            {
+                OnInteractableObjectDetected?.Invoke(closestObject);
+            }
+
             currentInteractableObject = closestObject;
 
         }
