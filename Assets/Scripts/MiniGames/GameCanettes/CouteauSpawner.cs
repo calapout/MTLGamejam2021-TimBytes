@@ -15,7 +15,7 @@ public class CouteauSpawner : MonoBehaviour
 
     public void SpawnCouteau()
     {
-        var g = GameObject.Instantiate(couteauPrefab, this.transform.position, Quaternion.identity);
+        var g = GameObject.Instantiate(couteauPrefab, this.transform.position, Quaternion.Euler(0, -90, -90));
         var s = g.GetComponent<Couteau>();
         s.OnHitGround.AddListener(() => {
             SpawnCouteau();
