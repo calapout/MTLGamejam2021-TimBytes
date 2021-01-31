@@ -120,6 +120,11 @@ public class PlayerController : Bytes.Controllers.FPSController
 
                     }
                 }
+                else if (hit.transform.tag == "Pickable")
+                {
+                    previouslyHadRaycast = true;
+                    EventManager.Dispatch("setInteractableText", new Bytes.StringDataBytes("&HAND_GRAB"));
+                }
             }
 
             if (previouslyHadRaycast && storedHit == null)
