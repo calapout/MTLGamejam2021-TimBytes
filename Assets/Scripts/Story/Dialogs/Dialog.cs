@@ -14,7 +14,7 @@ public class Dialog : MonoBehaviour
 
     public UnityEvent OnDialogStarted;
 
-    public void Start()
+    public virtual void Start()
     {
         EventManager.AddEventListener(eventListened, HandleDialog);
     }

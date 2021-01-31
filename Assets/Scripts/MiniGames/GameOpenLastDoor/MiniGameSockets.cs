@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+using Bytes;
+
 public class MiniGameSockets : MiniGame
 {
 
@@ -33,6 +35,15 @@ public class MiniGameSockets : MiniGame
     public void AddProgression()
     {
         progression++;
+
+        if(progression == 1) {
+
+            EventManager.Dispatch("setDialogText", new DialogDataBytes("Maybe there is more...", 0));
+            GameManager.instance.player.PlayDialog(3, ()=> {
+                EventManager.Dispatch("setDialogText", new DialogDataBytes("", 0));
+            });
+        }
+
         CheckIfDone();
     }
 

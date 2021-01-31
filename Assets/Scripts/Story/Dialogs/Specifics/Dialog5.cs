@@ -5,11 +5,11 @@ using UnityEngine.Events;
 
 using Bytes;
 
-public class Dialog4_Cuisine : Dialog
+public class Dialog5 : Dialog
 {
 
     public AnnaEntity annaEntity;
-    public Animator knifeAnim;
+    public Light endLight;
 
     public override void HandleDialog(Bytes.Data data)
     {
@@ -19,25 +19,27 @@ public class Dialog4_Cuisine : Dialog
         print("Dialog 4 Cuisine!");
         PlayerController player = GameManager.instance.player;
 
-        annaEntity.PlayKnifeAnim();
-        knifeAnim.Play("KnifeFall", -1, 0);
-        Animate.Delay(3f, ()=> { knifeAnim.enabled = false; });
+        player.canBeControlled = false;
 
-        EventManager.Dispatch("setDialogText", new DialogDataBytes("She wants you to kill some cans... HI HI HI", 1));
-        annaEntity.PlayDialog(5, () => {
+        EventManager.Dispatch("setDialogText", new DialogDataBytes("Wait, since when do I have a sister?", 0));
+
+        float start = endLight.intensity;
+        Animate.LerpSomething(4f, (f)=> {
+            endLight.intensity = Mathf.Lerp(start, 0f, f);
+        });
+
+        player.PlayDialog(8, () => {
 
             EventManager.Dispatch("playEyeBlink", null);
-            EventManager.Dispatch("setDialogText", new DialogDataBytes("", 0));
             Animate.Delay(0.05f, () => {
-                annaEntity.gameObject.SetActive(false);
+                annaEntity.gameObject.SetActive(true);
             });
 
             WaitForNextDialog(() => {
-                EventManager.Dispatch("setDialogText", new DialogDataBytes("I guess I have to throw some knives...", 0));
-                player.PlayDialog(6, () => {
-
+                EventManager.Dispatch("setDialogText", new DialogDataBytes("", 1));
+                annaEntity.PlayDialog(6, () => {
                     EventManager.Dispatch("setDialogText", new DialogDataBytes("", 0));
-
+                    EventManager.Dispatch("startCredits", null);
                 });
             });
 

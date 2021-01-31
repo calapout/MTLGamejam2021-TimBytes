@@ -7,7 +7,7 @@ public class Couteau : MonoBehaviour
 {
 
     private bool alreadyHit = false;
-
+    public bool dontDestroy = false;
     public UnityEvent OnHitGround;
 
     private void OnCollisionEnter(Collision collision)
@@ -19,7 +19,7 @@ public class Couteau : MonoBehaviour
             alreadyHit = true;
             Bytes.Animate.Delay(5f, ()=> {
                 OnHitGround?.Invoke();
-                Destroy(this.gameObject);
+                if(!dontDestroy) Destroy(this.gameObject);
             });
         }
     }

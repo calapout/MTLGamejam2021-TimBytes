@@ -8,6 +8,7 @@ using Bytes;
 public class AnnaEntity : DialogPlayer
 {
 
+    public Animator animAnna;
     float pitch;
 
     private void Awake()
@@ -18,6 +19,11 @@ public class AnnaEntity : DialogPlayer
     private void Update()
     {
         //source.pitch = pitch + Mathf.Sin(Time.time) * .05f;
+    }
+
+    public void PlayKnifeAnim()
+    {
+        animAnna.Play("Take 001", -1, 0);
     }
 
 }
