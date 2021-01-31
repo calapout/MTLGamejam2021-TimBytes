@@ -30,10 +30,6 @@ public class PlayerController : Bytes.Controllers.FPSController
         });
 
         Cursor.visible = false; Cursor.lockState = CursorLockMode.Locked;
-        Animate.Delay(5f, ()=> {
-            PlayDialog(0);
-            Animate.Delay(3f, ()=> { canBeControlled = true; });
-        });
     }
 
     protected override void Update()

@@ -21,7 +21,7 @@ public class Dialog5 : Dialog
 
         player.canBeControlled = false;
 
-        EventManager.Dispatch("setDialogText", new DialogDataBytes("Wait, since when do I have a sister?", 0));
+        EventManager.Dispatch("setDialogText", new DialogDataBytes("Wait... I don't have a sister?!", 0));
 
         float start = endLight.intensity;
         Animate.LerpSomething(4f, (f)=> {

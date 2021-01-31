@@ -14,6 +14,8 @@ public class Credits : MonoBehaviour
     {
         EventManager.AddEventListener("startCredits", (Bytes.Data d)=> {
 
+            EventManager.Dispatch("playEndMusic", null);
+
             Utils.PlayAnimatorClip(animCredits, "PlayCredits", ()=> {
                 SceneManager.LoadScene(SceneManager.GetActiveScene().name);
             });

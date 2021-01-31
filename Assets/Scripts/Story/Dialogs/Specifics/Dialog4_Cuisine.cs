@@ -33,7 +33,7 @@ public class Dialog4_Cuisine : Dialog
             });
 
             WaitForNextDialog(() => {
-                EventManager.Dispatch("setDialogText", new DialogDataBytes("I guess I have to throw some knives...", 0));
+                EventManager.Dispatch("setDialogText", new DialogDataBytes("I guess im gonna have to throw some knives...", 0));
                 player.PlayDialog(6, () => {
 
                     EventManager.Dispatch("setDialogText", new DialogDataBytes("", 0));

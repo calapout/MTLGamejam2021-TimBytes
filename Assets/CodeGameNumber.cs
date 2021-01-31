@@ -21,6 +21,7 @@ public class CodeGameNumber : MonoBehaviour
         else { value = 0; }
         txtNumber.text = value.ToString();
         OnValueChange?.Invoke(value);
+        Bytes.EventManager.Dispatch("playSound", new PlaySoundData("bip", 0.2f));
     }
 
     public void Decrement()
@@ -29,6 +30,7 @@ public class CodeGameNumber : MonoBehaviour
         else { value = 9; }
         txtNumber.text = value.ToString();
         OnValueChange?.Invoke(value);
+        Bytes.EventManager.Dispatch("playSound", new PlaySoundData("bip", 0.2f));
     }
 
 }

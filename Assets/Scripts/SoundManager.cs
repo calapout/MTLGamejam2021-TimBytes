@@ -31,10 +31,12 @@ public class PlaySoundData : Bytes.Data
 public class SoundManager : MonoBehaviour
 {
     public AudioSource source;
+    public AudioSource musicSource;
 
     private void Start()
     {
         EventManager.AddEventListener("playSound", PlaySound);
+        EventManager.AddEventListener("playEndMusic", (Bytes.Data d)=> { musicSource.Play(); });
     }
 
     private void PlaySound(Bytes.Data data)

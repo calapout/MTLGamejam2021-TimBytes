@@ -24,15 +24,18 @@ public class Dialog1 : Dialog
         print("Dialog 2!");
         PlayerController player = GameManager.instance.player;
 
+        player.canBeControlled = false;
+
         EventManager.Dispatch("setDialogText", new DialogDataBytes("Come find me...", 1));
         annaEntity.PlayDialog(0, () => {
-
+            player.canBeControlled = true;
             annaEntity.gameObject.SetActive(false);
 
             WaitForNextDialog(() => {
-                EventManager.Dispatch("setDialogText", new DialogDataBytes("Anna... Anna! Where are you!", 0));
+                EventManager.Dispatch("setDialogText", new DialogDataBytes("Anna... Anna! I have to find her again and get out of here...", 0));
                 player.PlayDialog(0, () => {
                     EventManager.Dispatch("setDialogText", new DialogDataBytes("", 0));
+                    
                 });
             });
 
