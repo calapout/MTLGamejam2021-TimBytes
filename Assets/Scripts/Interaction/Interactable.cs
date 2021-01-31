@@ -39,7 +39,7 @@ public class Interactable : MonoBehaviour
         if (dispatchToEventManager != "") { EventManager.Dispatch(dispatchToEventManager, null); }
     }
 
-    public string GetInteractionDescription()
+    public virtual string GetInteractionDescription()
     {
         return interactionDescription;
     }
