@@ -15,19 +15,31 @@ public class PlayerController : Bytes.Controllers.FPSController
 
     public float forceTowardPickedObj = 12f;
 
+    private DialogPlayer dialogPlayer;
+
     public void Start()
     {
+        canBeControlled = false;
         pickedItem = null;
         
         animController = GetComponentInChildren<GenericAnimationStateMachine>();
+        dialogPlayer = GetComponent<DialogPlayer>();
 
         EventManager.AddEventListener("playerDropsObject", (Bytes.Data d)=> {
             DropObject();
+        });
+
+        Cursor.visible = false; Cursor.lockState = CursorLockMode.Locked;
+        Animate.Delay(5f, ()=> {
+            PlayDialog(0);
+            Animate.Delay(3f, ()=> { canBeControlled = true; });
         });
     }
 
     protected override void Update()
     {
+        _PickItem_Update();
+
         if (!canBeControlled) { return; }
 
         if (Input.GetKeyDown(KeyCode.E))
@@ -38,18 +50,22 @@ public class PlayerController : Bytes.Controllers.FPSController
         float vitesse = _Movement_Update();
         _Camera_Update();
         _Controls_Update();
-        _PickItem_Update();
 
         if (vitesse > 0)
         {
             PlayerAnim used = PlayerAnim.Walking;
             if (vitesse > walkingSpeed) { used = PlayerAnim.Running; }
-            animController.SetLoopedState(used, "", true);
+            animController?.SetLoopedState(used, "", true);
         }
         else
         {
-            animController.SetLoopedState(PlayerAnim.Idle, "", true);
+            animController?.SetLoopedState(PlayerAnim.Idle, "", true);
         }
+    }
+
+    public void PlayDialog(int index, System.Action call = null)
+    {
+        dialogPlayer.PlayDialog(index, call);
     }
 
     public void Stop()
@@ -138,8 +154,7 @@ public class PlayerController : Bytes.Controllers.FPSController
             {
                 if (hit.transform.tag == "Pickable")
                 {
-                    pickedItem = hit.transform.GetComponent<Rigidbody>();
-                    pickedItem.freezeRotation = true;
+                    PickObject(hit.transform.GetComponent<Rigidbody>());
                     return;
                 }
             }
@@ -165,11 +180,17 @@ public class PlayerController : Bytes.Controllers.FPSController
 
     }
 
-    protected void DropObject()
+    public void PickObject(Rigidbody newPickedItem)
     {
-        if (pickedItem == null) { return; }
-
+        pickedItem = newPickedItem;
         pickedItem.freezeRotation = true;
+    }
+
+    public void DropObject()
+    {
+        if (pickedItem == null || !canBeControlled) { return; }
+
+        pickedItem.freezeRotation = false;
         pickedItem = null;
     }
 

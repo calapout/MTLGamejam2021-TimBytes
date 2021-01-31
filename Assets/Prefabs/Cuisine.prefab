@@ -115,8 +115,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 9.473008, y: 3.7241597, z: 3.1784186}
-  m_Center: {x: 3.291716, y: -0.00000011920929, z: 0.067833126}
+  m_Size: {x: 9.473008, y: 2.8040395, z: 3.1784186}
+  m_Center: {x: 3.291716, y: -0.46006036, z: 0.067833185}
 --- !u!1 &8813235243864607697
 GameObject:
   m_ObjectHideFlags: 0
@@ -979,6 +979,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: can
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: a815e585009a81c4a9990df1bb76bde5, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a815e585009a81c4a9990df1bb76bde5, type: 3}
 --- !u!1 &8543204331885875718 stripped
@@ -1045,6 +1049,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: a815e585009a81c4a9990df1bb76bde5, type: 3}
       propertyPath: m_Name
       value: can (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: a815e585009a81c4a9990df1bb76bde5, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a815e585009a81c4a9990df1bb76bde5, type: 3}
@@ -1271,6 +1279,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: can (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: a815e585009a81c4a9990df1bb76bde5, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a815e585009a81c4a9990df1bb76bde5, type: 3}
 --- !u!4 &9062473626913443322 stripped
@@ -1353,6 +1365,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: b39659061844c4945b461a2868095ab9, type: 3}
       propertyPath: m_TagString
       value: Pickable
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: b39659061844c4945b461a2868095ab9, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b39659061844c4945b461a2868095ab9, type: 3}
